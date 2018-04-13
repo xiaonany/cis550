@@ -1,0 +1,128 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Travel Around World
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/landing-page.css', rel='stylesheet')
+    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+
+  body
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
+      .container.topnav
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          //- button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          //-   span.sr-only Toggle navigation
+          //-   span.icon-bar
+          //-   span.icon-bar
+          //-   span.icon-bar
+          //- a.navbar-brand.topnav(href='/') Travel Around World
+
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#') Home
+            li
+              a(href='/login') Login
+        // /.navbar-collapse
+      // /.container
+
+    // Main Header
+    a(name='main-query' id="main-frame")
+    .intro-bg
+      .intro-header
+
+        h1 Travel Around World
+        hr.intro-divider
+
+      .intro-message
+        
+        //- form(method='get' action='query')
+          //- ul.list-inline.intro-main-query
+            //- .block
+            //-   label(for='location') Your Location
+            //-   input(type='text', name='location')
+            //- .block
+            //-   label(for='duration') Duration(days)：
+            //-   input(type='text', name='duration')
+            //- .block
+            //-   label(for='month') Travel Month:
+            //-   input(type='text', name='month')
+            //- .block.center
+            //-   input(type='submit', value='Search').btn-primary.btn-lg
+            //-   input(type='reset', value='Reset').btn-primary.btn-lg
+
+
+          //- li
+            
+          //-   h3
+          //-     .block
+          //-     label(for='location') Your Location:
+          //-     input(type='text', name='location')
+          //- li
+          //-   .block
+          //-   label(for='duration') Duration(days):
+          //-   input(type='text', name='duration')
+          //- li
+          //-   .block
+          //-   label(for='month') Travel Month:
+          //-   input(type='text', name='month')
+          //- li
+          //-   br
+          //-   input.btn-primary.btn-lg(type='submit', value='Search')
+          //-   input.btn-primary.btn-lg(type='reset', value='Reset')
+
+
+        .row.omb_row-sm-offset-3
+          .col-xs-12.col-sm-6
+            form.omb_loginForm(action='query', autocomplete='off', method='GET')
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-map-marker
+                input.form-control(type='text', name='location', placeholder='Your location')
+              span.help-block
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-clock-o
+                input.form-control(type='text', name='duration', placeholder='Duration(days)')
+              span.help-block
+              .input-group
+                span.input-group-addon
+                  i.fa.fa-calendar
+                input.form-control(type='text', name='month', placeholder='Travelling Month')
+              br
+              button.btn.btn-lg.btn-primary.btn-spacing(type='submit',margin-left='10px') Search
+              a.btn.btn-lg.btn-primary(href='/adSearch', role='button') Search with more details
+            
+
+
+    footer
+      .container
+        .row
+          .col-lg-12
+            ul.list-inline
+              li
+                p Contact: Group 9
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#about') About
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#services') Services
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#contact') Contact
+            p.copyright.text-muted.small Copyright © Group 9 - 2017. All Rights Reserved Authors: Xiaonan YANG, Qin Dong, Mingxuan Sun, Haiming Zhang
+    // jQuery
+    script(src='js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='js/bootstrap.min.js')
+    .modal
