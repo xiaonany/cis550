@@ -1,22 +1,37 @@
 var mongodb = require('mongodb');
 
-var uri = 'mongodb://cis550project:cis550project@ds127968.mlab.com:27968/cis550project';
+var uri = 'mongodb://xiaonany:123456@ds241699.mlab.com:41699/cis550project';
 
-exports.query_records = function(eName, dName, callback) {
+exports.adduser = function(name, pass, callback) {
   
-  	mongodb.MongoClient.connect(uri, function(err, db) {
-  
+  mongodb.MongoClient.connect(uri, function(err, db) { 
 	if(err) throw err;
+	var users = db.collection('users');
+	users.insert({"username": name, "password": pass});
+  });
 
-	var Records = db.collection('Records');
-	console.log("connect successfully")
-	
-	Records.find({"EName": eName, "DName": dName, "Medal": "Gold"}).sort({"Edition": 1, "Gender": 1})
-	.toArray(function(err, result) {
-	if (err) console.log(err);
-	console.log(result);
-	callback(result);
+}
 
+exports.finduser = function(name, callback) {
+  
+  mongodb.MongoClient.connect(uri, function(err, db) { 
+	if(err) throw err;
+	var users = db.collection('users');
+	users.find({"username": name}).toArray(function(err,result){
+		callback(result);
+	});
+
+  });
+
+}
+
+exports.matchuser = function(name, pass, callback) {
+  
+  mongodb.MongoClient.connect(uri, function(err, db) { 
+	if(err) throw err;
+	var users = db.collection('users');
+	users.find({"username": name}).toArray(function(err,result){
+		callback(result);
 	});
 
   });

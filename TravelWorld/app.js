@@ -2,6 +2,9 @@
 /**
  * Module dependencies.
  */
+
+var mongodb = require('./routes/MongoDB');
+
 var express = require('express');
 var index = require('./routes/index');
 var user = require('./routes/user');
@@ -16,12 +19,12 @@ var identityKey = 'skey';
 
 app.use(session({
     name: 'loginUser',
-    secret: 'chyingp',  // 用来对session id相关的cookie进行签名
-    store: new FileStore(),  // 本地存储session（文本文件，也可以选择其他store，比如redis的）
-    saveUninitialized: true,  // 是否自动保存未初始化的会话，建议false
-    resave: false,  // 是否每次都重新保存会话，建议false
+    secret: 'chyingp', 
+    store: new FileStore(),  
+    saveUninitialized: true, 
+    resave: false,
     cookie: {
-        maxAge: 120 * 1000  // 有效期，单位是毫秒
+        maxAge: 120 * 1000 
     }
 }));
 
@@ -53,19 +56,28 @@ var matchUser = function(name){
 
 app.post('/login', function(req, res, next){    
     var sess = req.session;
-    var user = findUser(req.body.username, req.body.pass);
-    console.log(user);
-    if(user){
-        req.session.regenerate(function(err) {
-            if(err){
-                return res.json({ret_code: 2, ret_msg: 'login failed'});                
-            }
-            req.session.loginUser = user.username;
-            res.redirect('/');                           
-        });
-    }else{
-        res.redirect('/relogin');
-    }   
+    var name = req.body.username;
+    var pass = req.body.pass;
+    mongodb.finduser(name,function(result) {
+        if(result[0] === undefined){
+            res.redirect('/relogin');
+        }else{
+            mongodb.finduser(name,function(result) {
+                var password = result[0].password;
+                if(password === pass){
+                    req.session.regenerate(function(err) {
+                        if(err){
+                            return res.json({ret_code: 2, ret_msg: 'login failed'});                
+                        }
+                        req.session.loginUser = name;
+                        res.redirect('/');                           
+                    });
+                }else{
+                    res.redirect('/relogin');
+                }
+            });
+        }
+    }); 
 });
 
 app.get('/logout', function(req, res, next){
@@ -85,13 +97,16 @@ app.get('/logout', function(req, res, next){
 app.post('/register', function(req, res, next){
     var name = req.body.username;
     var pass = req.body.pass;
-    var user = matchUser(name);
-    if(user){
-        res.redirect('/reregister');
-    }else{
-        users.push({username: name, password: pass})
-        res.redirect('/login');
-    } 
+
+    mongodb.finduser(name,function(result) {
+        if(result[0] === undefined){
+            mongodb.adduser(name, pass);
+            res.redirect('/login');
+        }else{
+            res.redirect('/reregister');
+        }
+    });
+    
 });
 
 //判断是否登录
@@ -120,6 +135,7 @@ app.get('/adSearch', function(req, res, next){
 // var fs = require('fs');
 // var options = {key: fs.readFileSync('server.key','utf8'),cert: fs.readFileSync('server.crt','utf8'),rejectUnathorized: false};
 
+app.get('/profile', index.profile);
 
 // development only
 if ('development' == app.get('env')) {
@@ -127,7 +143,7 @@ if ('development' == app.get('env')) {
 }
 
 // app.get('/', index.index1);
-app.get('/user', user.list);
+// app.get('/user', user.list);
 app.get('/login', index.login);
 app.get('/relogin', index.relogin);
 app.get('/register', index.register);
