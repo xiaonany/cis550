@@ -3,6 +3,8 @@
  * Module dependencies.
  */
 
+
+var oracledb = require("./routes/OracleDB");
 var mongodb = require('./routes/MongoDB');
 
 var express = require('express');
@@ -29,7 +31,7 @@ app.use(session({
 }));
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -150,15 +152,7 @@ app.get('/register', index.register);
 app.get('/reregister', index.reregister);
 
 
-app.get('/query', function(request, response) {
-	var location = request.query.location;
-	var duration = request.query.duration;
-	var month = request.query.month;
-	var budget = request.query.budget;
-	var specNeeds = request.query.specNeeds;
-	var temperature = request.query.temperature;
-	var country = request.query.country;
-});
+app.get('/query?', oracledb.query);
 
 
 http.createServer(app).listen(app.get('port'), function(){
