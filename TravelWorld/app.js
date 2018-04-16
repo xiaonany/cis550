@@ -150,6 +150,7 @@ app.get('/login', index.login);
 app.get('/relogin', index.relogin);
 app.get('/register', index.register);
 app.get('/reregister', index.reregister);
+app.get('/result', index.result);
 
 
 app.get('/query?', oracledb.query);

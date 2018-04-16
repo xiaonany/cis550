@@ -37,3 +37,7 @@ exports.adSearch = function(req, res){
 exports.profile = function(req, res){
   res.render('profile', {username: req.session.loginUser})
 };
+
+exports.result = function(req, res){
+	res.render('result')
+};

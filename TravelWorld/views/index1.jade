@@ -11,8 +11,15 @@ html(lang='en')
     link(href='css/landing-page.css', rel='stylesheet')
     link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='js/script.js')
+    link(href='css/ResultTable.css', rel='stylesheet')
 
-  body
+
+
+  body(ng-app="myApp")
     // Navigation
     nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
       .container.topnav
@@ -39,80 +46,59 @@ html(lang='en')
 
     // Main Header
     a(name='main-query' id="main-frame")
-    .intro-bg
-      .intro-header
+    div(ng-controller='myController')
+      .content
+        .intro-bg
+          .intro-header
 
-        h1 Travel Around World
-        hr.intro-divider
-
-      .intro-message
-        
-        //- form(method='get' action='query')
-          //- ul.list-inline.intro-main-query
-            //- .block
-            //-   label(for='location') Your Location
-            //-   input(type='text', name='location')
-            //- .block
-            //-   label(for='duration') Duration(days)：
-            //-   input(type='text', name='duration')
-            //- .block
-            //-   label(for='month') Travel Month:
-            //-   input(type='text', name='month')
-            //- .block.center
-            //-   input(type='submit', value='Search').btn-primary.btn-lg
-            //-   input(type='reset', value='Reset').btn-primary.btn-lg
+            h1 Travel Around World
+            hr.intro-divider
 
 
-          //- li
-            
-          //-   h3
-          //-     .block
-          //-     label(for='location') Your Location:
-          //-     input(type='text', name='location')
-          //- li
-          //-   .block
-          //-   label(for='duration') Duration(days):
-          //-   input(type='text', name='duration')
-          //- li
-          //-   .block
-          //-   label(for='month') Travel Month:
-          //-   input(type='text', name='month')
-          //- li
-          //-   br
-          //-   input.btn-primary.btn-lg(type='submit', value='Search')
-          //-   input.btn-primary.btn-lg(type='reset', value='Reset')
-
-
-        .row.omb_row-sm-offset-3
-          .col-xs-12.col-sm-6
-            form.omb_loginForm(action='query', autocomplete='off', method='GET')
-              .input-group
-                span.input-group-addon
-                  i.fa.fa-map-marker
-                input.form-control(type='text', name='location', placeholder='Your location')
-              span.help-block
-              .input-group
-                span.input-group-addon
-                  i.fa.fa-clock-o
-                input.form-control(type='text', name='duration', placeholder='Duration(days)')
-              span.help-block
-              .input-group
-                span.input-group-addon
-                  i.fa.fa-calendar
-                input.form-control(type='text', name='month', placeholder='Travelling Month')
-              br
-              button.btn.btn-lg.btn-primary.btn-spacing(type='submit',margin-left='10px') Search
-              a.btn.btn-lg.btn-primary(href='/adSearch', role='button') Search with more details
-            
-
-
-    footer
-      .container
-        .row
-          .col-lg-12
-            ul.list-inline
-              li
-                p Contact: Group 9
+          .intro-message
+            .row.omb_row-sm-offset-3
+              .col-xs-12.col-sm-6
+                //- form.omb_loginForm(action='query', autocomplete='off', method='GET')
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-map-marker
+                  input.form-control(type='text', name='location', placeholder='Your location', ng-model="location", value="")
+                span.help-block
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-clock-o
+                  input.form-control(type='text', name='duration', placeholder='Duration(days)', ng-model="duration", value="")
+                span.help-block
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(type='text', name='month', placeholder='Travelling Month', ng-model="month", value="")
+                br
+                button.btn.btn-lg.btn-primary.btn-spacing(type='button', ng-click="query()", class="button", margin-left='10px') Search
+      .sidenav
+        //- table.paleBlueRows
+        //-   thead
+        //-     tr
+        //-       th cityName
+        //-   tbody
+        //-     tr
+        //-       tr(ng-repeat='x in myData')
+        //-         td {{ x[0] }}
+        table.greyGridTable
+          thead
+            tr
+              th cityName
+          tbody
+            tr
+              tr(ng-repeat='x in myData')
+                td {{ x[0] }}
+      footer
+        .container
+          .row
+            .col-lg-12
+              ul.list-inline
+                li
+                  p Contact: Group 9
               //- li.footer-menu-divider
               //- li
               //-   a(href='#about') About

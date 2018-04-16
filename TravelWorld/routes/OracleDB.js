@@ -34,7 +34,7 @@ function doRelease(connection) {
 }
 
 exports.query = function(req, res) {
-
+	console.log("here");
 	var loc = req.query.location; 
 	var dur = req.query.duration;
 	var mon = req.query.month;
@@ -204,7 +204,8 @@ function q_123_less(req,res){
 				   "SELECT c2.cityName FROM City c2,loca ca \n"+
 				   "WHERE ABS(c2.Lat - ca.c_lat)<"+dur+" AND ABS(c2.Lon - ca.c_lon)<"+dur+" AND ABS(c2.Lat - ca.c_lat)>0";
 	sendQuery(queryString, function(result){
-		res.send(result);
+		// res.render('result', {data: result.rows});
+		res.json(result.rows);
 	});
 }
 
