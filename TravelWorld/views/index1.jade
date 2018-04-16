@@ -75,15 +75,8 @@ html(lang='en')
                   input.form-control(type='text', name='month', placeholder='Travelling Month', ng-model="month", value="")
                 br
                 button.btn.btn-lg.btn-primary.btn-spacing(type='button', ng-click="query()", class="button", margin-left='10px') Search
+                a.btn.btn-lg.btn-primary(href='/adSearch', role='button') Search with more details
       .sidenav
-        //- table.paleBlueRows
-        //-   thead
-        //-     tr
-        //-       th cityName
-        //-   tbody
-        //-     tr
-        //-       tr(ng-repeat='x in myData')
-        //-         td {{ x[0] }}
         table.greyGridTable
           thead
             tr
@@ -99,15 +92,6 @@ html(lang='en')
               ul.list-inline
                 li
                   p Contact: Group 9
-              //- li.footer-menu-divider
-              //- li
-              //-   a(href='#about') About
-              //- li.footer-menu-divider
-              //- li
-              //-   a(href='#services') Services
-              //- li.footer-menu-divider
-              //- li
-              //-   a(href='#contact') Contact
             p.copyright.text-muted.small Copyright © Group 9 - 2017. All Rights Reserved Authors: Xiaonan YANG, Qin Dong, Mingxuan Sun, Haiming Zhang
     // jQuery
     script(src='js/jquery.js')
