@@ -1,0 +1,78 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Travel Around World
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/landing-page.css', rel='stylesheet')
+    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='js/script.js')
+    link(href='css/ResultTable.css', rel='stylesheet')
+
+  body(ng-app="myApp")
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
+      .container.topnav
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/') Home
+            li
+              a(href='/logout') Logout
+        // /.navbar-collapse
+      // /.container
+
+    // Main Header
+    a(name='main-query' id="main-frame")
+
+    .profile-header
+      h1 Welcome!
+      h1= username
+
+    div(ng-controller='myController')
+      .intro-message
+        .row.omb_row-sm-offset-3
+          .col-xs-12.col-sm-6
+            button.btn.btn-lg.btn-primary.btn-spacing(type='button', ng-click="getProfile()", class="button", margin-left='10px') Show my search log!
+        table.greyGridTable
+          thead
+            tr
+              th queryLog
+              th resultLog
+          tbody
+            tr(ng-repeat='x in myData')
+              td {{ x.searchLog }}
+              td {{ x.resultLog }}
+
+
+    footer
+      .container
+        .row
+          .col-lg-12
+            ul.list-inline
+              li
+                p Contact: Group 9
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#about') About
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#services') Services
+              //- li.footer-menu-divider
+              //- li
+              //-   a(href='#contact') Contact
+            p.copyright.text-muted.small Copyright © Group 9 - 2017. All Rights Reserved Authors: Xiaonan YANG, Qin Dong, Mingxuan Sun, Haiming Zhang
+    // jQuery
+    script(src='js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='js/bootstrap.min.js')
+    script(src='js/index.js')
+    .modal

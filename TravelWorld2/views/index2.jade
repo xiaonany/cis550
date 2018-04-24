@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Travel Around World
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/landing-page.css', rel='stylesheet')
+    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    script(src='js/script.js')
+    link(href='css/ResultTable.css', rel='stylesheet')
+
+
+
+  body(ng-app="myApp")
+    // Navigation
+    nav.navbar.navbar-default.navbar-fixed-top.topnav(role='navigation')
+      .container.topnav
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          //- button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          //-   span.sr-only Toggle navigation
+          //-   span.icon-bar
+          //-   span.icon-bar
+          //-   span.icon-bar
+          //- a.navbar-brand.topnav(href='/') Travel Around World
+
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#') Home
+            li
+              a(href='/logout') Logout
+            li 
+              a(href='/profile') profile
+        // /.navbar-collapse
+      // /.container
+
+    // Main Header
+    a(name='main-query' id="main-frame")
+    div(ng-controller='myAdController')
+      .content.extendable.full
+        .intro-bg
+          .intro-header
+
+            h1 Travel Around World
+            hr.intro-divider
+
+
+          .intro-message
+            .row.omb_row-sm-offset-3
+              .col-xs-12.col-sm-6
+                //- form.omb_loginForm(action='query', autocomplete='off', method='GET')
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-map-marker
+                  input.form-control(type='text', name='location', placeholder='City name, must captalize first letter, eg Beijing, New York', ng-model="location", value="")
+                span.help-block
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-clock-o
+                  input.form-control(type='text', name='duration', placeholder='Days in integer, eg 1,4,19,40', ng-model="duration", value="")
+                span.help-block
+                .input-group
+                  span.input-group-addon
+                    i.fa.fa-calendar
+                  input.form-control(type='text', name='month', placeholder='Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dect', ng-model="month", value="")
+                br
+                button.btn.btn-lg.btn-primary.btn-spacing(type='button', ng-click="query()", class="button", margin-left='10px') Search
+                a.btn.btn-lg.btn-primary(href='/adSearch', role='button') Search with more details
+      .sidenav.full
+        table.greyGridTable
+          thead
+            tr
+              th Country
+              th CityName
+          tbody
+            tr
+              tr(ng-repeat='x in myData')
+                td {{ x[0] }}
+                td {{ x[1] }}
+      footer.full.extendable
+        .container
+          .row
+            .col-lg-12
+              ul.list-inline
+                li
+                  p Contact: Group 9
+            p.copyright.text-muted.small Copyright © Group 9 - 2017. All Rights Reserved Authors: Xiaonan Yang, Qin Dong, Mingxuan Sun, Haiming Zhang
+    // jQuery
+    script(src='js/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='js/bootstrap.min.js')
+    .modal
